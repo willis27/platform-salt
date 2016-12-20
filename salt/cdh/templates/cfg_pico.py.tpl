@@ -546,7 +546,7 @@ SPARK_CFG = {
         {'type': 'SPARK_YARN_HISTORY_SERVER', 'config': {}},
         {'type': 'GATEWAY', 'config': {
             'spark_history_enabled': 'false',
-            'spark-conf/spark-defaults.conf_client_config_safety_valve': 'spark.yarn.executor.memoryOverhead=384\nspark.driver.memory=512m\nspark.executor.memory=512m\nspark.yarn.am.memory=512m\nspark.executor.cores=1',
-            'spark_dynamic_allocation_max_executors': '4'}}
+            'spark-conf/spark-defaults.conf_client_config_safety_valve': 'spark.yarn.executor.memoryOverhead=384\nspark.driver.memory=1g\nspark.executor.memory=1g\nspark.yarn.am.memory=1g\nspark.executor.cores=1'}
+        }
     ]
 }
