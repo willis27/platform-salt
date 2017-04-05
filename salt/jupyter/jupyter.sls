@@ -1,7 +1,7 @@
 {% set pnda_home_directory = pillar['pnda']['homedir'] %}
 {% set virtual_env_dir = pnda_home_directory + '/jupyter' %}
 {% set pip_index_url = pillar['pip']['index_url'] %}
-
+{% set pip_extra_index_url = salt['pillar.get']('pip:extra_index_url', 'https://pypi.python.org/simple/') %}
 {% set jupyter_kernels_dir = '/usr/local/share/jupyter/kernels' %}
 {% set os_user = salt['pillar.get']('os_user', 'cloud-user') %}
 
@@ -16,6 +16,7 @@ jupyter-create-venv:
     - python: python3
     - requirements: salt://jupyter/files/requirements-jupyter.txt
     - index_url: {{ pip_index_url }}
+    - extra_index_url: {{ pip_extra_index_url }}
     - require:
       - pip: python-pip-install_python_pip
 

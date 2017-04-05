@@ -6,14 +6,12 @@
 {% set archive_container = salt['pillar.get']('pnda.archive_container', 'archive') %}
 {% set archive_type = salt['pillar.get']('pnda.archive_type', 'swift') %}
 {% set archive_service = salt['pillar.get']('pnda.archive_service', '.pnda') %}
-
 {% set pnda_user  = pillar['pnda']['user'] %}
 {% set gobblin_work_dir = '/user/' + pnda_user + '/gobblin/work' %}
-
 {% set install_dir = pillar['pnda']['homedir'] %}
-
 {% set virtual_env_dir = install_dir + "/" + app_directory_name + "/venv" %}
 {% set pip_index_url = pillar['pip']['index_url'] %}
+{% set pip_extra_index_url = salt['pillar.get']('pip:extra_index_url', 'https://pypi.python.org/simple/') %}
 
 include:
   - python-pip
@@ -33,6 +31,7 @@ hdfs-cleaner-create-venv:
     - requirements: salt://hdfs-cleaner/files/requirements.txt
     - python: python2
     - index_url: {{ pip_index_url }}
+    - extra_index_url: {{ pip_extra_index_url }}
     - require:
       - pip: python-pip-install_python_pip
       - archive: hdfs-cleaner-dl-and-extract

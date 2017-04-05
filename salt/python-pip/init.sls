@@ -1,4 +1,5 @@
 {% set pip_index_url = pillar['pip']['index_url'] %}
+{% set pip_extra_index_url = salt['pillar.get']('pip:extra_index_url', 'https://pypi.python.org/simple/') %}
 
 python-pip-install-pip-package:
   pkg.installed:
@@ -19,5 +20,6 @@ python-pip-install_python_pip:
     - upgrade: True
     - reload_modules: True
     - index_url: {{ pip_index_url }}
+    - extra_index_url: {{ pip_extra_index_url }}
     - require:
       - pkg: python-pip-install-pip-package

@@ -1,13 +1,10 @@
-## Install Jupyter Spark extension ##
-
 {% set pnda_home_directory = pillar['pnda']['homedir'] %}
 {% set virtual_env_dir = pnda_home_directory + '/jupyter' %}
 {% set pip_index_url = pillar['pip']['index_url'] %}
-
+{% set pip_extra_index_url = salt['pillar.get']('pip:extra_index_url', 'https://pypi.python.org/simple/') %}
 {% set pnda_mirror = pillar['pnda_mirror']['base_url'] %}
 {% set misc_packages_path = pillar['pnda_mirror']['misc_packages_path'] %}
 {% set mirror_location = pnda_mirror + misc_packages_path %}
-
 {% set extensions_package = 'jupyter-spark-0.3.0-patch.tar.gz' %}
 {% set extensions_url = mirror_location + extensions_package %}
 
@@ -31,6 +28,7 @@ jupyter-extension_install_jupyter_spark:
     - requirements: {{ virtual_env_dir }}/requirements-jupyter-extensions.txt
     - python: python3
     - index_url: {{ pip_index_url }}
+    - extra_index_url: {{ pip_extra_index_url }}
     - bin_env: {{ virtual_env_dir }}
 
 jupyter-extension_jupyter_spark:

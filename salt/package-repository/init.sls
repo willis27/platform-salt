@@ -4,9 +4,9 @@
 {% set package_repository_package = 'package-repository-' + package_repository_version + '.tar.gz' %}
 {% set install_dir = pillar['pnda']['homedir'] %}
 {% set package_repository_fs_type = salt['pillar.get']('package_repository:fs_type', '') %}
-
 {% set virtual_env_dir = install_dir + "/" + package_repository_directory_name + "/venv" %}
 {% set pip_index_url = pillar['pip']['index_url'] %}
+{% set pip_extra_index_url = salt['pillar.get']('pip:extra_index_url', 'https://pypi.python.org/simple/') %}
 
 include:
   - python-pip
@@ -26,6 +26,7 @@ package-repository-create-venv:
     - requirements: {{ install_dir }}/{{ package_repository_directory_name }}/requirements.txt
     - python: python2
     - index_url: {{ pip_index_url }}
+    - extra_index_url: {{ pip_extra_index_url }}
     - reload_modules: True
     - require:
       - pip: python-pip-install_python_pip

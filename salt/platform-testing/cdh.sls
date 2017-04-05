@@ -1,15 +1,12 @@
 {% set packages_server = pillar['packages_server']['base_uri'] %}
 {% set platform_testing_version = salt['pillar.get']('platform_testing:release_version', '0.1.1') %}
 {% set platform_testing_directory = salt['pillar.get']('platform_testing:release_directory', '/opt/pnda') %}
-
 {% set platform_testing_package = 'platform-testing-cdh' %}
-
 {% set virtual_env_dir = platform_testing_directory + "/" + platform_testing_package + "-" + platform_testing_version + "/venv" %}
 {% set pip_index_url = pillar['pip']['index_url'] %}
-
+{% set pip_extra_index_url = salt['pillar.get']('pip:extra_index_url', 'https://pypi.python.org/simple/') %}
 {% set console_port = '3001' %}
 {% set cm_port = '7180' %}
-
 {% set cm_hoststring = salt['pnda.cloudera_manager_ip']()  %}
 {% set console_hoststring = salt['pnda.ip_addresses']('console_backend_data_logger')[0] + ":" + console_port %}
 {% set cm_username = pillar['admin_login']['user'] %}
@@ -44,6 +41,7 @@ platform-testing-cdh-create-venv:
     - requirements: {{ platform_testing_directory }}/{{ platform_testing_package }}-{{ platform_testing_version }}/requirements.txt
     - python: python2
     - index_url: {{ pip_index_url }}
+    - extra_index_url: {{ pip_extra_index_url }}
     - require:
       - pip: python-pip-install_python_pip
       - archive: platform-testing-cdh-dl-and-extract
@@ -59,6 +57,7 @@ platform-testing-cdh-install-requirements-cdh:
     - bin_env: {{ virtual_env_dir }}
     - requirements: {{ platform_testing_directory }}/{{platform_testing_package}}-{{ platform_testing_version }}/plugins/cdh/requirements.txt
     - index_url: {{ pip_index_url }}
+    - extra_index_url: {{ pip_extra_index_url }}
     - require:
       - virtualenv: platform-testing-cdh-create-venv
 
@@ -100,6 +99,7 @@ platform-testing-cdh-install-requirements-cdh_blackbox:
     - bin_env: {{ virtual_env_dir }}
     - requirements: {{ platform_testing_directory }}/{{platform_testing_package}}-{{ platform_testing_version }}/plugins/cdh_blackbox/requirements.txt
     - index_url: {{ pip_index_url }}
+    - extra_index_url: {{ pip_extra_index_url }}
     - require:
       - virtualenv: platform-testing-cdh-create-venv
 

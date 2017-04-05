@@ -2,9 +2,9 @@
 {% set pnda_home_directory = pillar['pnda']['homedir'] %}
 {% set virtual_env_dir = pnda_home_directory + '/jupyter' %}
 {% set pip_index_url = pillar['pip']['index_url'] %}
+{% set pip_extra_index_url = salt['pillar.get']('pip:extra_index_url', 'https://pypi.python.org/simple/') %}
 {% set proxy_version = pillar['jupyterproxy']['release_version'] %}
 {% set proxy_package = 'jupyterproxy-' + proxy_version + '.tar.gz' %}
-
 {% set jupyterhub_config_dir = '/etc/jupyterhub' %}
 
 include:
@@ -14,6 +14,7 @@ jupyterhub-install:
   pip.installed:
     - requirements: salt://jupyter/files/requirements-jupyterhub.txt
     - index_url: {{ pip_index_url }}
+    - extra_index_url: {{ pip_extra_index_url }}
     - bin_env: {{ virtual_env_dir }}
     - require:
       - virtualenv: jupyter-create-venv

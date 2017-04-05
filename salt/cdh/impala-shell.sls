@@ -1,5 +1,6 @@
 {% set virtual_env_dir = pillar['pnda']['homedir'] + "/impala-wrapper" %}
 {% set pip_index_url = pillar['pip']['index_url'] %}
+{% set pip_extra_index_url = salt['pillar.get']('pip:extra_index_url', 'https://pypi.python.org/simple/') %}
 
 include:
   - python-pip
@@ -10,6 +11,7 @@ cdh-impala_shell_venv:
     - python: python2
     - requirements: salt://cdh/files/impala-shell-requirements.txt
     - index_url: {{ pip_index_url }}
+    - extra_index_url: {{ pip_extra_index_url }}
     - require:
       - pip: python-pip-install_python_pip
 

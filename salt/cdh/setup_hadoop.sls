@@ -1,9 +1,7 @@
 {% set flavor_cfg = pillar['pnda_flavor']['states'][sls] %}
-
 {% set scripts_location = '/tmp/pnda-install/' + sls %}
 {% set pnda_cluster = salt['pnda.cluster_name']() %}
 {% set cloudera_p = salt['pillar.get']('cloudera', {}) %}
-
 {% set keystone_user = salt['pillar.get']('keystone.user', "") %}
 {% set keystone_password = salt['pillar.get']('keystone.password', "") %}
 {% set keystone_tenant = salt['pillar.get']('keystone.tenant', "") %}
@@ -13,6 +11,7 @@
 {% set aws_key = salt['pillar.get']('aws.archive_key', '') %}
 {% set aws_secret_key = salt['pillar.get']('aws.archive_secret', '') %}
 {% set pip_index_url = pillar['pip']['index_url'] %}
+{% set pip_extra_index_url = salt['pillar.get']('pip:extra_index_url', 'https://pypi.python.org/simple/') %}
 
 include:
   - python-pip
@@ -35,6 +34,7 @@ cdh-create_tmp_virtualenv:
     - requirements: salt://cdh/files/requirements-cm_setup.txt
     - python: python2
     - index_url: {{ pip_index_url }}
+    - extra_index_url: {{ pip_extra_index_url }}
     - require:
       - pip: python-pip-install_python_pip
 
