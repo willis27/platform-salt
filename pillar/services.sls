@@ -82,7 +82,7 @@ package_repository:
   release_version: develop
 
 data-service:
-  release_version: develop
+  release_version: PNDA-3427
 
 hdfs_cleaner:
   release_version: develop
