@@ -1,4 +1,4 @@
-{{ env }}:
+{{ saltenv }}:
 
   '*':
     - volumes
