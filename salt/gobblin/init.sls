@@ -41,7 +41,7 @@ gobblin-dl-and-extract:
     - source: {{ packages_server }}/{{ gobblin_package }}
     - source_hash: {{ packages_server }}/{{ gobblin_package }}.sha512.txt
     - archive_format: tar
-    - options: zvxf
+    - options: v
     - if_missing: {{ gobblin_real_dir }}/gobblin-dist
     - require:
       - file: gobblin-create_gobblin_version_directory

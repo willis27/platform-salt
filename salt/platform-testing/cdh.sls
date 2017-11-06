@@ -34,7 +34,7 @@ platform-testing-cdh-dl-and-extract:
     - source: {{ packages_server }}/{{platform_testing_package}}-{{ platform_testing_version }}.tar.gz
     - source_hash: {{ packages_server }}/{{ platform_testing_package }}-{{ platform_testing_version }}.tar.gz.sha512.txt
     - archive_format: tar
-    - options: zvxf
+    - options: v
     - if_missing: {{ platform_testing_directory }}/{{ platform_testing_package }}-{{ platform_testing_version }}
 
 {% if grains['os'] == 'RedHat' %}

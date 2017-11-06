@@ -41,7 +41,7 @@ zookeeper-dl-and-extract:
     - source: {{ zookeeper_url }}
     - source_hash: {{ zookeeper_url }}.sha1
     - archive_format: tar
-    - options: zvxf
+    - options: v
     - if_missing: {{ install_dir }}/zookeeper-{{ zookeeper_version }}
 
 {% set nodes = [] %}

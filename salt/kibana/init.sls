@@ -25,7 +25,7 @@ kibana-dl_and_extract_kibana:
     - user: kibana
     - group: kibana
     - archive_format: tar
-    - options: zvxf --strip-components=1
+    - options: --strip-components=1
     - if_missing: {{ kibana_directory }}/bin/kibana
 
 kibana-copy_configuration_kibana:
