@@ -13,7 +13,7 @@ console-backend-utils-dl-and-extract:
     - source: {{ packages_server }}/{{ backend_utils_package }}
     - source_hash: {{ packages_server }}/{{ backend_utils_package }}.sha512.txt
     - archive_format: tar
-    - tar_options: v
+    - options: zvxf
     - if_missing: {{ install_dir }}/console-backend-utils-{{ backend_utils_version }}
 
 console-backend-symlink_utils_dir:

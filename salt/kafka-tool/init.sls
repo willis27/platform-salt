@@ -22,7 +22,7 @@ kafka-tool-extract:
     - source: {{ packages_server }}/{{ release_filename }}
     - source_hash: {{ packages_server }}/{{ release_filename }}.sha512.txt
     - archive_format: tar
-    - tar_options: v
+    - options: zvxf
     - if_missing: {{ release_directory }}/kafka-tool-{{ release_version }}
 
 kafka-tool-create_link:

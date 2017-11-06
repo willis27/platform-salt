@@ -36,7 +36,7 @@ console-backend-data-manager-dl-and-extract:
     - source: {{ packages_server }}/{{ backend_app_package }}
     - source_hash: {{ packages_server }}/{{ backend_app_package }}.sha512.txt
     - archive_format: tar
-    - tar_options: v
+    - options: zvxf
     - if_missing: {{ install_dir }}/console-backend-data-manager-{{ backend_app_version }}
 
 console-backend-symlink_data_manager_dir:

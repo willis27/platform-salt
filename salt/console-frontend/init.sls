@@ -60,7 +60,7 @@ console-frontend-dl-and-extract:
     - group: nginx
 {% endif %}
     - archive_format: tar
-    - tar_options: --strip-components=1
+    - options: zvxf --strip-components=1
     - if_missing: {{ console_dir }}-{{ console_frontend_version }}
 
 console-frontend-create_directory_link:
