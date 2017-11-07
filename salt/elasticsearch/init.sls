@@ -65,7 +65,8 @@ elasticsearch-dl_and_extract_elasticsearch:
     - user: elasticsearch
     - group: elasticsearch
     - archive_format: tar
-    - options: --strip-components=1
+    - list_options: zcat
+    - options: xvz --strip-components=1
     - if_missing: {{ es_p.directory }}/bin/elasticsearch
 
 {% if grains['os'] == 'Ubuntu' %}
