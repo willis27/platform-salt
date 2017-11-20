@@ -14,7 +14,7 @@ BLUEPRINT = r'''{
                     "timeline.metrics.skip.disk.metrics.patterns" : "true",
                     "ambari_metrics_user" : "ams",
                     "metrics_monitor_log_dir" : "/var/log/pnda/ambari-metrics-monitor",
-                    "metrics_collector_heapsize" : "512",
+                    "metrics_collector_heapsize" : "1024",
                     "failover_strategy_blacklisted_interval" : "300",
                     "metrics_collector_pid_dir" : "/var/run/ambari-metrics-collector",
                     "metrics_collector_log_dir" : "/var/log/pnda/ambari-metrics-collector",
@@ -109,7 +109,9 @@ BLUEPRINT = r'''{
         {
             "ams-hbase-env" : {
                 "properties" : {
-                    "hbase_log_dir" : "/var/log/pnda/ambari-metrics-collector"
+                    "hbase_log_dir" : "/var/log/pnda/ambari-metrics-collector",
+                    "hbase_master_heapsize": "1024",
+                    "hbase_regionserver_heapsize" : "1536"
                 }
             }
         },
@@ -129,7 +131,8 @@ BLUEPRINT = r'''{
             "yarn-env" : {
                 "properties" : {
                     "yarn_log_dir_prefix" : "/var/log/pnda/hadoop-yarn",
-                    "resourcemanager_heapsize" : "4096"
+                    "resourcemanager_heapsize" : "4096",
+                    "nodemanager_heapsize": "4096"
                 }
             }
         },
@@ -137,11 +140,14 @@ BLUEPRINT = r'''{
             "yarn-site" : {
                 "properties" : {
                     "yarn.nodemanager.log-dirs" : "/var/log/pnda/hadoop-yarn/container",
-                    "yarn.nodemanager.resource.cpu-vcores" : "7",
-                    "yarn.nodemanager.resource.memory-mb" : "14336",
+                    "yarn.nodemanager.resource.cpu-vcores" : "48",
+                    "yarn.nodemanager.resource.memory-mb" : "78848",
+                    "yarn.nodemanager.vmem-check-enabled": "false",
                     "yarn.log-aggregation.retain-seconds" : "265000",
                     "yarn.scheduler.minimum-allocation-vcores" : "1",
-                    "yarn.scheduler.maximum-allocation-vcores" : "7",
+                    "yarn.scheduler.maximum-allocation-vcores" : "48",
+                    "yarn.scheduler.minimum-allocation-mb" : "1024",
+                    "yarn.scheduler.maximum-allocation-mb": "78848",
                     "hadoop.registry.rm.enabled" : "false",
                     "hadoop.registry.zk.quorum" : "%(cluster_name)s-hadoop-mgr-1:2181,%(cluster_name)s-hadoop-mgr-2:2181,%(cluster_name)s-hadoop-mgr-4:2181",
                     "yarn.log.server.url" : "http://%(cluster_name)s-hadoop-mgr-4:19888/jobhistory/logs",
@@ -181,9 +187,17 @@ BLUEPRINT = r'''{
             }
         },
         {
+            "mapred-env":{
+                "properties": {
+                    "jobhistory_heapsize": "8192"
+                }
+            }
+        },
+        {
             "zookeeper-env" : {
                 "properties" : {
-                    "zk_log_dir" : "/var/log/pnda/zookeeper"
+                    "zk_log_dir" : "/var/log/pnda/zookeeper",
+                    "zk_server_heapsize" : "2048"
                 }
             }
         },
@@ -201,7 +215,8 @@ BLUEPRINT = r'''{
                     "oozie_data_dir" : "/data0/var/lib/oozie/data",
                     "oozie_user" : "oozie",
                     "oozie_admin_users" : "{oozie_user}, oozie-admin",
-                    "oozie_database" : "Existing MySQL / MariaDB Database"
+                    "oozie_database" : "Existing MySQL / MariaDB Database",
+                    "oozie_heapsize": "4096m"
                 }
             }
         },
@@ -235,7 +250,18 @@ BLUEPRINT = r'''{
                     "javax.jdo.option.ConnectionURL" : "jdbc:mysql://%(cluster_name)s-hadoop-mgr-4/hive",
                     "javax.jdo.option.ConnectionUserName" : "hive",
                     "hive_log_dir" : "/var/log/pnda/hive",
-                    "hcat_log_dir" : "/var/log/pnda/webhcat"                }
+                    "hcat_log_dir" : "/var/log/pnda/webhcat",
+                    "hive.client.heapsize": "4096",
+                    "hive.heapsize": "16384",
+                    "hive.metastore.heapsize": "16384"
+                }
+            }
+        },
+        {
+            "hive-interactive-env": {
+                "properties": {
+                    "hive_heapsize": "16384"
+                }
             }
         },
         {
@@ -267,10 +293,14 @@ BLUEPRINT = r'''{
         {
             "hadoop-env" : {
                 "properties" : {
-                    "namenode_heapsize": "3072m",
-                    "namenode_opt_maxnewsize": "361m",
-                    "namenode_opt_newsize": "361m",
-                    "hdfs_log_dir_prefix" : "/var/log/pnda/hadoop"
+                    "namenode_heapsize": "16384m",
+                    "namenode_opt_maxnewsize": "2048m",
+                    "namenode_opt_newsize": "2048m",
+                    "namenode_opt_permsize": "128m",
+                    "namenode_opt_maxpermsize": "256m",
+                    "hdfs_log_dir_prefix": "/var/log/pnda/hadoop",
+                    "hadoop_heapsize": "2048",
+                    "dtnode_heapsize" : "2048m"
                 }
             }
         },
