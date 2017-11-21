@@ -12,6 +12,8 @@ All notable changes to this project will be documented in this file.
 - PNDA-2832: Added sql magic support for Jupyter notebooks
 - PNDA-1788: Cloudera version can be set in the salt pillar
 - PNDA-3314: Added new flavor for larger PNDAs called "production"
+- PNDA-3484: Add CentOS support
+- PNDA-1899: Scala Spark Jupyter Integration
 
 ### Changed
 - PNDA-2965: Rename `cloudera_*` role grains to `hadoop_*`
@@ -23,6 +25,8 @@ All notable changes to this project will be documented in this file.
 - PNDA-2884: Upgrade CDH and Cloudera Manager version 5.12.1
 - PNDA-3380: Move opentsdb log to /var/log/pnda
 - PNDA-3441: Cleanup warnings from create_notebook_dir.sh script
+- PNDA-3451: Use existing MySQL for the Ambari database
+- PNDA-2486: Move yarn local directories to /data0 to separate the data from the operating system partition.
 
 ### Fixed
 - PNDA-3213: fix issue on wrong checksum file name for logserver sls
@@ -36,6 +40,7 @@ All notable changes to this project will be documented in this file.
 - PNDA-3238: Add jupyter extensions to the kenel virtual environment.
 - PNDA-3350: Fix dm.pem permission post deployment highstate.
 - PNDA-3432: Jupyter not launching after reboot on RHEL.
+- PNDA-3013: Fix issue on Keystone passwords with illegal XML characters (such as &) cause Hadoop setup to fail.
 
 ## [2.0.0] 2017-05-23
 ### Added

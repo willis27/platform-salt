@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
  {
 =======
 {
 >>>>>>> acdfc653d2e734ad542e6d09c6d8ec6088c3a15a
+=======
+{
+>>>>>>> df070553b2c9179222601c8ada6de803e9a3db99
   "argv": [
     "{{ virtual_env_dir }}/bin/python",
     "-m",

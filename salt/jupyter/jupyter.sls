@@ -21,6 +21,7 @@
 {% set mirror_location = pnda_mirror + misc_packages_path %}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 {% set jupyter_scala_package = mirror_location + 'jupyter-scala-0.4.2.tar.gz' %}
 {% set jupyter_scala_dir = 'jupyter-scala-0.4.2' %}
 =======
@@ -28,6 +29,11 @@
 {% set jupyter_scala_package_name = 'jupyter-scala_2.11.6-0.2.0-SNAPSHOT.zip' %}
 {% set jupyter_scala_dir = 'jupyter-scala_2.11.6-0.2.0-SNAPSHOT' %}
 >>>>>>> acdfc653d2e734ad542e6d09c6d8ec6088c3a15a
+=======
+{% set jupyter_scala_package = mirror_location + 'jupyter-scala_2.11.6-0.2.0-SNAPSHOT.zip' %}
+{% set jupyter_scala_package_name = 'jupyter-scala_2.11.6-0.2.0-SNAPSHOT.zip' %}
+{% set jupyter_scala_dir = 'jupyter-scala_2.11.6-0.2.0-SNAPSHOT' %}
+>>>>>>> df070553b2c9179222601c8ada6de803e9a3db99
 {% set scala_install_dir = pnda_home_directory + '/scala' %}
 
 {% set livy_package_name = 'livy-0.4.0-incubating-bin.zip' %}
@@ -152,8 +158,11 @@ install-jupyter_scala:
   cmd.run:
     - cwd: {{ scala_install_dir }}
 <<<<<<< HEAD
+<<<<<<< HEAD
     - name: wget '{{ jupyter_scala_package }}' -O - | tar zx  && {{ scala_install_dir }}/{{ jupyter_scala_dir }}/jupyter-scala --force
 =======
+=======
+>>>>>>> df070553b2c9179222601c8ada6de803e9a3db99
     - name: wget '{{ jupyter_scala_package }}' && unzip -o {{ scala_install_dir }}/{{ jupyter_scala_package_name }}
 
 
@@ -168,7 +177,10 @@ load-jupyter_exec:
 exec-jupyter_scala:
   cmd.run:
     - name: {{ scala_install_dir }}/{{ jupyter_scala_dir }}/bin/jupyter-scala
+<<<<<<< HEAD
 >>>>>>> acdfc653d2e734ad542e6d09c6d8ec6088c3a15a
+=======
+>>>>>>> df070553b2c9179222601c8ada6de803e9a3db99
 
 jupyter-create_scala_kernel_dir:
   file.directory:
@@ -180,6 +192,7 @@ jupyter-create_scala_kernel_dir:
 jupyter-copy_configs:
   cmd.run:
     - name: |
+<<<<<<< HEAD
 <<<<<<< HEAD
         mv /root/.local/share/jupyter/kernels/scala/* {{ jupyter_kernels_dir }}/jupyter_scala &&
         rm -rf /root/.local/share/jupyter/kernels/scala &&
@@ -198,12 +211,17 @@ jupyter-copy_scala_kernel:
       jupyter_kernels_dir: {{ jupyter_kernels_dir }}
 
 =======
+=======
+>>>>>>> df070553b2c9179222601c8ada6de803e9a3db99
         mv  /root/.ipython/kernels/scala211/* {{ jupyter_kernels_dir }}/jupyter_scala &&
         rm -rf /root/.ipython/kernels/scala211 &&
         chmod -R 755 {{ jupyter_kernels_dir }}/jupyter_scala
 {% endif %}
 
+<<<<<<< HEAD
 >>>>>>> acdfc653d2e734ad542e6d09c6d8ec6088c3a15a
+=======
+>>>>>>> df070553b2c9179222601c8ada6de803e9a3db99
 # Add sparkmagic to the supported kernel and install livy server
 jupyter-create_livy_server_dir:
   file.directory:
@@ -287,6 +305,10 @@ livy-server-start_service:
     - enable: True
     - reload: True
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> acdfc653d2e734ad542e6d09c6d8ec6088c3a15a
+=======
+
+>>>>>>> df070553b2c9179222601c8ada6de803e9a3db99
