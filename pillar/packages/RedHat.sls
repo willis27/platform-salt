@@ -68,9 +68,6 @@ libz:
   package-name: zlib-devel
 libzmq:
   package-name: czmq-devel
-krb5-devel:
-  package-name: krb5-devel
-  version: ""
 mysql-server:
   package-name: mysql-community-server
   version: "5.5.54-2.el7"
